@@ -58,21 +58,21 @@ app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use((req, res, next) => {
-	res.header(
-		'Access-Control-Allow-Methods',
-		'GET,PUT,POST,DELETE,UPDATE,OPTIONS'
-	);
-	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Content-Type', 'application/json;charset=UTF-8');
-	res.header('Access-Control-Allow-Credentials', true);
-	res.header(
-		'Access-Control-Allow-Headers',
-		'Origin, X-Requested-With, Content-Type, Accept'
-	);
+// app.use((req, res, next) => {
+// 	res.header(
+// 		'Access-Control-Allow-Methods',
+// 		'GET,PUT,POST,DELETE,UPDATE,OPTIONS'
+// 	);
+// 	res.header('Access-Control-Allow-Origin', '*');
+// 	res.header('Content-Type', 'application/json;charset=UTF-8');
+// 	res.header('Access-Control-Allow-Credentials', true);
+// 	res.header(
+// 		'Access-Control-Allow-Headers',
+// 		'Origin, X-Requested-With, Content-Type, Accept'
+// 	);
 
-	next();
-});
+// 	next();
+// });s
 
 // static files
 app.use('/images', express.static('./public/img/products'));
