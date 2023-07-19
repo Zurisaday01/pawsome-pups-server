@@ -8,6 +8,8 @@ import rateLimit from 'express-rate-limit';
 import path from 'path';
 import AppError from './utils/appError.js';
 import globalErrorHandler from './controllers/errorController.js';
+import helmet from 'helmet';
+import compression from 'compression';
 
 // import connection MongoDB
 import connectDB from './config/db.js';
@@ -29,13 +31,14 @@ connectDB();
 
 const app = express();
 
+// if your website is running behind a proxy
+app.enable('trust proxy');
+
 // Implement CORS
-app.use(
-	cors({
-		origin: true,
-		credentials: true,
-	})
-);
+app.options('*', cors());
+
+// Set security HTTP headers
+app.use(helmet());
 
 if (process.env.NODE_ENV === 'development') {
 	app.use(morgan('dev'));
@@ -50,7 +53,7 @@ const limiter = rateLimit({
 // url parse update user
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
-app.use('/api', limiter);
+app.use('/v', limiter);
 
 app.use(express.json());
 
@@ -60,8 +63,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(function (req, res, next) {
 	// Make `user` and `authenticated` available in templates
-	res.locals.user = req.user;
-	res.locals.authenticated = !req.user.anonymous;
+	// res.locals.user = req.user;
+	// res.locals.authenticated = !req.user.anonymous;
 
 	res.header(
 		'Access-Control-Allow-Methods',
@@ -70,13 +73,11 @@ app.use(function (req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Content-Type', 'application/json;charset=UTF-8');
 	res.header('Access-Control-Allow-Credentials', true);
-	res.header(
-		'Access-Control-Allow-Headers',
-		'Origin, X-Requested-With, Content-Type, Accept'
-	);
 
 	next();
 });
+
+app.use(compression());
 
 // static files
 app.use('/images', express.static('./public/img/products'));
@@ -94,7 +95,7 @@ app.use('/v1/address', addressRoutes);
 app.use('/v1/orders', orderRoutes);
 
 app.all('*', (req, res, next) => {
-	next(new AppError(`Can't find ${req.originalUrl} on this server!`));
+	next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
 // Global error middleware
