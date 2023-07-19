@@ -64,7 +64,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(function (req, res, next) {
 	// Make `user` and `authenticated` available in templates
 	// res.locals.user = req.user;
-	// res.locals.authenticated = !req.user.anonymous;
+	// res.locals.authenticated = !req.user.anonymous;	
 
 	res.header(
 		'Access-Control-Allow-Methods',
