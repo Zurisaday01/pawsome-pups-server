@@ -38,6 +38,7 @@ app.enable('trust proxy');
 app.use(cors({
 	credentials: true,
 	origin: true,
+	exposedHeaders: ["set-cookie"]
 }));
 
 // Set security HTTP headers
@@ -67,8 +68,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(function (req, res, next) {
 	res.header("Access-Control-Allow-Origin", req.header('Origin'));
 	res.header('Access-Control-Allow-Methods','GET, POST, PATCH, PUT, DELETE, OPTIONS');
-	res.header('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept, Authorization');
+	res.header('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept, Authorization, set-cookie');
 	res.header('Access-Control-Allow-Credentials', true);	
+	res.
 
 	next();
 });
