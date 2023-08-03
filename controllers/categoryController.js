@@ -20,7 +20,7 @@ export const getAllCategories = catchAsync(async (req, res, next) => {
 
 	res.status(200).json({
 		status: 'success',
-		rasults: categories.length,
+		results: categories.length,
 		data: {
 			categories,
 		},
