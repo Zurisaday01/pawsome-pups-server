@@ -36,8 +36,8 @@ app.enable('trust proxy');
 
 // Implement CORS
 app.use(cors({
-	origin: true,
 	credentials: true,
+	origin: 'https://pawsome-pups-server.onrender.com',
 }));
 
 // Set security HTTP headers
@@ -65,7 +65,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(function (req, res, next) {
-	res.header("Access-Control-Allow-Origin", "https://pawsome-pups-server.onrender.com");
+	res.header("Access-Control-Allow-Origin", "*");
 	res.header('Access-Control-Allow-Methods','GET, POST, PATCH, PUT, DELETE, OPTIONS');
 	res.header('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept, Authorization');
 	res.header('Access-Control-Allow-Credentials', true);	
