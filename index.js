@@ -64,8 +64,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(function (req, res, next) {
 	res.header('Access-Control-Allow-Origin: *');
 	res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-	res.header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-	res.header('Content-Type', 'application/json;charset=UTF-8');
 	res.header('Access-Control-Allow-Credentials', true);
 
 	next();
