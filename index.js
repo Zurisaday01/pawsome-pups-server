@@ -35,7 +35,7 @@ const app = express();
 app.enable('trust proxy');
 
 // Implement CORS
-app.options('*', cors());
+app.options('*', cors({origin: true, credentials: true}));
 
 // Set security HTTP headers
 app.use(helmet());
@@ -62,15 +62,9 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(function (req, res, next) {
-	// Make `user` and `authenticated` available in templates
-	// res.locals.user = req.user;
-	// res.locals.authenticated = !req.user.anonymous;	
-
-	res.header(
-		'Access-Control-Allow-Methods',
-		'GET,PUT,POST,DELETE,UPDATE,OPTIONS'
-	);
-	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Origin: *');
+	res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+	res.header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 	res.header('Content-Type', 'application/json;charset=UTF-8');
 	res.header('Access-Control-Allow-Credentials', true);
 
