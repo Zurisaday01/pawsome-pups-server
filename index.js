@@ -67,9 +67,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(function (req, res, next) {
 	res.header("Access-Control-Allow-Origin", req.header('Origin'));
 	res.header('Access-Control-Allow-Methods','GET, POST, PATCH, PUT, DELETE, OPTIONS');
-	res.header('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept, Authorization, set-cookie');
-	res.header('Access-Control-Allow-Credentials', "true");	
+	res.header('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept, Authorization, Set-Cookie');
+	res.header('Access-Control-Allow-Credentials', true);	
 	res.header('access-control-expose-headers', 'Set-Cookie');	
+	res.header('Cross-Origin-Resource-Policy', 'cross-site');	
 
 	next();
 });
