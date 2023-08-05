@@ -16,7 +16,7 @@ export const getCart = catchAsync(async (req, res, next) => {
 
 	res.status(200).json({
 		status: 'success',
-		result: currentCart?.[0]?.items?.length,
+		results: currentCart?.[0]?.items?.length,
 		data: {
 			cart: currentCart[0],
 		},
