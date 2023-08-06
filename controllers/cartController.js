@@ -68,7 +68,7 @@ export const createAndAddItemToCart = catchAsync(async (req, res, next) => {
 
 		const option = variants.find(
 			option =>
-				option.size === req.body.size && option.color.at(0) === req.body.color
+				option.size === req.body.size && option.color[0] === req.body.color
 		);
 		/*
 
