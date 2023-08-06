@@ -86,7 +86,7 @@ export const createAndAddItemToCart = catchAsync(async (req, res, next) => {
 
 		let validationProductAdded = false;
 		currentCart.items.forEach(item => {
-			if (item.productId.id === req.body.productId)
+			if (item.productId.id === req.body.productId && item.size === req.body.size)
 				validationProductAdded = true;
 		});
 
